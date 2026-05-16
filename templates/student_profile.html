@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.I.R.S. - Student Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+<div class="d-flex">
+    <div class="bg-dark text-white p-3 vh-100" style="width: 260px; position: fixed; left: 0; top: 0; z-index: 1000;">
+        <div class="d-flex align-items-center justify-content-center gap-2 mb-4 pb-3" style="border-bottom: 1px solid #444;">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="S.I.R.S. Logo" style="width: 45px; height: 45px; object-fit: contain;">
+            <h4 class="text-warning m-0 fw-bold" style="letter-spacing: 1px;">S.I.R.S.</h4>
+        </div>
+        
+        <ul class="nav flex-column gap-2">
+            <li class="nav-item">
+                <a href="{{ url_for('teacher_dashboard') }}" class="nav-link text-white py-2 px-3 rounded d-flex align-items-center gap-2" style="background: rgba(255,255,255,0.05);">
+                    <i class="fas fa-arrow-left text-secondary"></i> Dashboard Home
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content flex-grow-1" style="margin-left: 260px; padding: 30px; min-height: 100vh;">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{{ url_for('teacher_dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Student Profile</li>
+                </ol>
+            </nav>
+            <a href="{{ url_for('teacher_dashboard') }}" class="btn btn-outline-secondary btn-sm px-3 rounded-pill shadow-sm">
+                <i class="fas fa-chevron-left me-1"></i> Back to List
+            </a>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-8">
+                <div class="card border-0 shadow-sm p-4 h-100 bg-white" style="border-radius: 15px;">
+                    <div class="d-flex align-items-center gap-4">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 85px; height: 85px; font-size: 28px; min-width: 85px;">
+                            {{ student.name[:2].upper() }}
+                        </div>
+                        <div>
+                            <h2 class="fw-bold text-dark mb-1" style="font-size: 28px;">{{ student.name }}</h2>
+                            <p class="text-secondary m-0 d-flex align-items-center gap-3" style="font-size: 14px;">
+                                <span><i class="fas fa-id-card me-1 text-primary"></i> ID: <strong class="text-dark">{{ student.student_id }}</strong></span>
+                                <span><i class="fas fa-graduation-cap me-1 text-success"></i> Section: <strong class="text-dark">{{ student.section }}</strong></span>
+                                {% if student.course %}
+                                <span><i class="fas fa-book me-1 text-info"></i> Course: <strong class="text-dark">{{ student.course }}</strong></span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-4 h-100 text-center bg-white" style="border-radius: 15px; border-left: 5px solid #0d6efd !important;">
+                    <span class="text-uppercase tracking-wider text-secondary fw-semibold mb-2" style="font-size: 12px; letter-spacing: 0.5px;">Cumulative GPA</span>
+                    <h1 class="display-4 fw-bold text-dark m-0" style="font-size: 42px;">
+                        {% if overall_gpa > 0 %}{{ "%.2f"|format(overall_gpa) }}{% else %}0.00{% endif %}
+                    </h1>
+                    <div class="mt-2">
+                        {% if overall_gpa > 0 and overall_gpa <= 3.00 %}
+                            <span class="badge bg-success-subtle text-success px-3 py-1 rounded-pill" style="font-size: 12px;">Good Standing</span>
+                        {% elif overall_gpa > 3.00 %}
+                            <span class="badge bg-danger-subtle text-danger px-3 py-1 rounded-pill" style="font-size: 12px;">Needs Review</span>
+                        {% else %}
+                            <span class="badge bg-light text-secondary px-3 py-1 rounded-pill" style="font-size: 12px;">No Evaluation</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+            <div class="card-header bg-white py-3 px-4 border-0">
+                <h5 class="m-0 fw-bold text-dark d-flex align-items-center gap-2">
+                    <i class="fas fa-file-invoice text-primary"></i> Academic Transcript Breakdown
+                </h5>
+            </div>
+            <div class="table-responsive px-4 pb-4">
+                <table class="table table-hover align-middle m-0" style="border-color: #f1f1f1;">
+                    <thead class="table-light text-secondary" style="font-size: 13px;">
+                        <tr>
+                            <th class="py-3 fw-semibold">Subject Title</th>
+                            <th class="py-3 fw-semibold text-center">Written (20%)</th>
+                            <th class="py-3 fw-semibold text-center">Performance (40%)</th>
+                            <th class="py-3 fw-semibold text-center">Prelim (10%)</th>
+                            <th class="py-3 fw-semibold text-center">Midterm (10%)</th>
+                            <th class="py-3 fw-semibold text-center">Finals (20%)</th>
+                            <th class="py-3 fw-semibold text-center">Final Rating</th>
+                            <th class="py-3 fw-semibold text-center">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 14px; color: #495057;">
+                        {% if grades %}
+                            {% for grade in grades %}
+                            <tr>
+                                <td class="py-3 fw-bold text-dark">{{ grade['subject'] }}</td>
+                                <td class="py-3 text-center text-secondary">{{ grade['written'] or '0.0' }}</td>
+                                <td class="py-3 text-center text-secondary">{{ grade['pt'] or '0.0' }}</td>
+                                <td class="py-3 text-center text-secondary">{{ grade['pre'] or '0.0' }}</td>
+                                <td class="py-3 text-center text-secondary">{{ grade['mid'] or '0.0' }}</td>
+                                <td class="py-3 text-center text-secondary">{{ grade['fin'] or '0.0' }}</td>
+                                <td class="py-3 text-center fw-bold text-primary" style="font-size: 15px;">
+                                    {{ "%.2f"|format(grade['final_point']) if grade['final_point'] else '0.00' }}
+                                </td>
+                                <td class="py-3 text-center">
+                                    {% if grade['final_point'] and grade['final_point'] > 0 %}
+                                        {% if grade['final_point'] <= 3.00 %}
+                                            <span class="badge bg-success px-3 py-2 rounded shadow-sm" style="font-size: 11px; min-width: 75px;">PASSED</span>
+                                        {% else %}
+                                            <span class="badge bg-danger px-3 py-2 rounded shadow-sm" style="font-size: 11px; min-width: 75px;">FAILED</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="badge bg-secondary px-3 py-2 rounded" style="font-size: 11px; min-width: 75px;">No Grade</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="8" class="text-center py-5 text-secondary">
+                                    <i class="fas fa-folder-open d-block mb-2 text-light" style="font-size: 40px;"></i>
+                                    No transcript records found for this semester.
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

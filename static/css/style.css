@@ -1,0 +1,27 @@
+body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+.sidebar { width: 250px; background: #2c3e50; color: white; height: 100vh; position: fixed; padding: 30px 15px; z-index: 100; }
+.sidebar h2 { border-bottom: 2px solid #ffcc00; padding-bottom: 10px; text-align: center; }
+.main-content { margin-left: 250px; padding: 40px; }
+.nav-item { display: block; color: #ecf0f1; text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 10px; transition: 0.3s; }
+.nav-item:hover { background: #34495e; }
+
+.card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+.welcome-banner { display: flex; justify-content: space-between; align-items: center; border-left: 10px solid #ffcc00; }
+.dashboard-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 20px; }
+
+/* Status Badges */
+.status-badge { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+.active-status { background: #e3fcef; color: #00b894; }
+.risk-status { background: #fff3e0; color: #e67e22; }
+
+/* Folder Interior Specifics */
+.stat-card-mini { background: white; padding: 15px; border-radius: 12px; border-left: 5px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.folder-card { transition: 0.3s; border: 1px solid transparent; cursor: pointer; }
+.folder-card:hover { transform: translateY(-5px); border-color: #ffcc00; box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+
+/* Existing Table Styles */
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th { background: #fdfdfd; padding: 15px; border-bottom: 2px solid #eee; text-align: left; color: #555; }
+td { padding: 15px; border-bottom: 1px solid #f9f9f9; }
+.action-icon { cursor: pointer; margin: 0 5px; transition: 0.2s; }
+.action-icon:hover { transform: scale(1.2); }

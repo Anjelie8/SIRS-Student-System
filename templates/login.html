@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S.I.R.S. | Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='school_bg.jpg') }}");
+            background-size: cover; background-position: center;
+            display: flex; justify-content: center; align-items: center; height: 100vh;
+            margin: 0; position: relative; font-family: 'Segoe UI', sans-serif;
+        }
+        body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1; }
+        .login-container { z-index: 2; }
+        .modern-login { background: white; padding: 40px; border-radius: 20px; text-align: center; width: 350px; border-top: 8px solid #ffcc00; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .logo-login { width: 80px; margin-bottom: 10px; }
+        .input-group { position: relative; margin-bottom: 15px; }
+        .input-group i { position: absolute; left: 15px; top: 12px; color: #2c3e50; }
+        .input-group input { width: 100%; padding: 12px 12px 12px 45px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
+        .btn-login { width: 100%; padding: 12px; background: #2c3e50; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-login:hover { background: #1a252f; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="modern-login">
+            <!-- Nilagay ko na ang logo dito sa login para professional tignan -->
+            <!-- Siguraduhin na images/logo.png ang path kung nasa loob siya ng images folder -->
+            <img src="{{ url_for('static', filename='images/logo.png') }}"" alt="Logo" class="logo-login">
+            <h1 style="color:#2c3e50; margin: 5px 0;">S.I.R.S.</h1>
+            <p style="color:#666; font-size: 14px; margin-bottom: 25px;">Records Management System</p>
+            
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="username" placeholder="Username / Admin ID" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-login">ACCESS SYSTEM</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

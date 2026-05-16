@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+students.db
+SIRS_Student_Records.xlsx
+.venv/
+venv/
