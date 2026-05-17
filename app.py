@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, send_file
+from flask import Flask, render_template, request, session, redirect, url_for, flash, send_file 
 import sqlite3
-import random
 import os
+import random
 import pandas as pd
 
 app = Flask(__name__)
