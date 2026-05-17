@@ -25,3 +25,62 @@ th { background: #fdfdfd; padding: 15px; border-bottom: 2px solid #eee; text-ali
 td { padding: 15px; border-bottom: 1px solid #f9f9f9; }
 .action-icon { cursor: pointer; margin: 0 5px; transition: 0.2s; }
 .action-icon:hover { transform: scale(1.2); }
+
+/* --- MOBILE RESPONSIVE STYLES (Para sa Phone) --- */
+@media screen and (max-width: 768px) {
+    /* 1. Baguhin ang main layout mula magkatabi patungong magkapatong */
+    .dashboard-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 2. Gawing full width ang sidebar sa itaas sa halip na nakaharang sa kaliwa */
+    .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        position: relative !important;
+        padding: 15px !important;
+    }
+
+    .sidebar .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .sidebar a {
+        padding: 8px 12px !important;
+        font-size: 14px;
+    }
+
+    /* 3. Ayusin ang main content area para magkasya sa screen */
+    .main-content {
+        margin-left: 0 !important;
+        padding: 15px !important;
+        width: 100% !important;
+    }
+
+    /* 4. PINAKAMAHALAGA: Lagyan ng swipe/scroll ang Grading Table */
+    .table-container {
+        width: 100%;
+        overflow-x: auto; /* Nagdadagdag ng horizontal scrollbar sa phone */
+        -webkit-overflow-scrolling: touch;
+        margin-top: 15px;
+    }
+
+    table {
+        min-width: 600px; /* Pinipilit ang table na panatilihin ang maayos na spacing */
+        font-size: 13px;
+    }
+
+    /* 5. Ayusin ang mga dropdown fields (Subject & Semester) */
+    .filter-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-section select, .filter-section button {
+        width: 100% !important;
+    }
+}
