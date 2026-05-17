@@ -271,7 +271,7 @@
                                 
                                 <td style="padding: 15px;">
                                     {% if student[14] is not none and student[14] > 0 %}
-                                        {% if student[14] <= 2.75 %}
+                                        {% if student[14] <= 3.00 %}
                                             <span class="status-badge active">On Track</span>
                                         {% else %}
                                             <span class="status-badge needs-attention">Needs Attention</span>
@@ -283,10 +283,10 @@
                                 
                                 <td style="padding: 15px; text-align: center;">
                                     <div style="display: flex; gap: 5px; justify-content: center;">
-                                        <a href="{{ url_for('student_profile', sid=student[0]) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                        <a href="{{ url_for('student_profile', sid=student[0]) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3" style="text-decoration: none; color: #3498db; font-size: 13px;">
                                             <i class="fas fa-user me-1"></i> View Profile
                                         </a>
-                                        <a href="/delete_student/{{ student[0] }}" onclick="return confirm('Delete?')" style="color: #e74c3c; margin-left: 10px;"><i class="fas fa-trash"></i></a>
+                                        <a href="/delete_student/{{ student[0] }}" onclick="return confirm('Are you sure you want to delete this record?')" style="color: #e74c3c; margin-left: 15px; align-self: center;"><i class="fas fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -337,13 +337,13 @@
                 <thead>
                     <tr style="background: #2c3e50; color: white; text-align: center;">
                         <th rowspan="2" style="padding: 12px; border: 1px solid #444; text-align: left; width: 200px;">Student Name</th>
-                        <th style="border: 1px solid #fffcfc; background: #ffd3d3;">Written Works (20%)</th>
-                        <th style="border: 1px solid #ffffff; background: #ffd3d3;">Perf. Tasks (40%)</th>
-                        <th colspan="3" style="border: 1px solid #ffffff; background: #ffd3d3;">Major Exams (40%)</th>
+                        <th style="border: 1px solid #fffcfc; background: #ffd3d3; color: #333;">Written Works (20%)</th>
+                        <th style="border: 1px solid #ffffff; background: #ffd3d3; color: #333;">Perf. Tasks (40%)</th>
+                        <th colspan="3" style="border: 1px solid #ffffff; background: #ffd3d3; color: #333;">Major Exams (40%)</th>
                         <th rowspan="2" style="border: 1px solid #ffffff; background: #948880; width: 80px;">Final Point</th>
                         <th rowspan="2" style="border: 1px solid #ffffff; background: #948880; width: 80px;">Status</th>
                     </tr>
-                    <tr style="background: #ecf0f1; color: #ffffff; text-align: center; font-size: 11px;">
+                    <tr style="background: #ecf0f1; color: #333; text-align: center; font-size: 11px;">
                         <th style="border: 1px solid #ccc; padding: 5px;">
                             Max: <input type="number" name="max_written" value="100" style="width: 45px; text-align: center; border: 1px solid #bdc3c7;">
                         </th>
@@ -370,19 +370,19 @@
                         </td>
                         
                         <td style="border: 1px solid #ddd;">
-                            <input type="number" step="0.01" name="written[]" value="{{ s[2] if s[2] != None else '' }}" style="width: 55px; text-align: center;">
+                            <input type="number" step="0.01" name="written[]" value="{{ s[2] if s[2] != None else '' }}" style="width: 55px; text-align: center; border: 1px solid #eee; padding: 4px;">
                         </td>
                         <td style="border: 1px solid #ddd;">
-                            <input type="number" step="0.01" name="pt[]" value="{{ s[3] if s[3] != None else '' }}" style="width: 55px; text-align: center;">
+                            <input type="number" step="0.01" name="pt[]" value="{{ s[3] if s[3] != None else '' }}" style="width: 55px; text-align: center; border: 1px solid #eee; padding: 4px;">
                         </td>
                         <td style="border: 1px solid #ddd;">
-                            <input type="number" step="0.01" name="pre[]" value="{{ s[4] if s[4] != None else '' }}" style="width: 45px; text-align: center;">
+                            <input type="number" step="0.01" name="pre[]" value="{{ s[4] if s[4] != None else '' }}" style="width: 45px; text-align: center; border: 1px solid #eee; padding: 4px;">
                         </td>
                         <td style="border: 1px solid #ddd;">
-                            <input type="number" step="0.01" name="mid[]" value="{{ s[5] if s[5] != None else '' }}" style="width: 45px; text-align: center;">
+                            <input type="number" step="0.01" name="mid[]" value="{{ s[5] if s[5] != None else '' }}" style="width: 45px; text-align: center; border: 1px solid #eee; padding: 4px;">
                         </td>
                         <td style="border: 1px solid #ddd;">
-                            <input type="number" step="0.01" name="fin[]" value="{{ s[6] if s[6] != None else '' }}" style="width: 45px; text-align: center;">
+                            <input type="number" step="0.01" name="fin[]" value="{{ s[6] if s[6] != None else '' }}" style="width: 45px; text-align: center; border: 1px solid #eee; padding: 4px;">
                         </td>
 
                         <td style="border: 1px solid #ddd; font-weight: bold; background: #fff9e6; color: #2c3e50;">
@@ -390,9 +390,9 @@
                         </td>
 
                         <td style="border: 1px solid #ddd; font-weight: bold;">
-                            {% if s[7] and s[7] <= 3.0 %}
+                            {% if s[7] and s[7] <= 3.00 and s[7] > 0 %}
                                 <span style="color: #27ae60;">PASSED</span>
-                            {% elif s[7] %}
+                            {% elif s[7] and s[7] > 3.00 %}
                                 <span style="color: #e74c3c;">FAILED</span>
                             {% else %}
                                 <span style="color: #95a5a6;">-</span>
