@@ -6,9 +6,6 @@ import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = "sirs_official_system_2026"
-@app.before_request
-def setup_database():
-    init_db()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, 'students.db')
